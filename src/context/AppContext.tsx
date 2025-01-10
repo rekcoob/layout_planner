@@ -18,7 +18,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [rectLength, setRectLength] = useState<number>(200)
   const [rectWidth, setRectWidth] = useState<number>(100)
-  const [formatLength, setFormatLength] = useState<number>(2000)
+  const [formatLength, setFormatLength] = useState<number>(1995)
   const [formatWidth, setFormatWidth] = useState<number>(1000)
 
   return (
