@@ -16,10 +16,10 @@ const AppContext = createContext<AppState | null>(null)
 export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [rectLength, setRectLength] = useState<number>(200)
+  const [rectLength, setRectLength] = useState<number>(240)
   const [rectWidth, setRectWidth] = useState<number>(100)
   const [formatLength, setFormatLength] = useState<number>(1995)
-  const [formatWidth, setFormatWidth] = useState<number>(1000)
+  const [formatWidth, setFormatWidth] = useState<number>(840)
 
   return (
     <AppContext.Provider

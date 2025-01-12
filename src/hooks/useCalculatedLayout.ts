@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { calculateLayout, CalculationResults } from '../services/calculations'
+import { calculateLayout, CalculationResults } from '../utils/calculateLayout'
 
 export const useCalculatedLayout = (
   rectLength: number,
@@ -17,6 +17,7 @@ export const useCalculatedLayout = (
     cols2: 0,
     rows2: 0,
     total2: 0,
+    adjustedTotal2: 0,
     remainder2: 0,
 
     totalRectangles: 0,

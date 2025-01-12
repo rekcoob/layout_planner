@@ -15,14 +15,15 @@ const Results: React.FC = () => {
     cols2,
     rows2,
     total2,
+    adjustedTotal2,
     remainder2,
     totalRectangles,
   } = useCalculatedLayout(rectLength, rectWidth, formatLength, formatWidth)
 
   let bestOptionMessage
-  if (adjustedTotal1 > total2) {
+  if (adjustedTotal1 > adjustedTotal2) {
     bestOptionMessage = <strong>Option 1 (Lengthwise) is better.</strong>
-  } else if (total2 > adjustedTotal1) {
+  } else if (adjustedTotal2 > adjustedTotal1) {
     bestOptionMessage = <strong>Option 2 (Crosswise) is better.</strong>
   } else {
     bestOptionMessage = (
@@ -60,6 +61,8 @@ const Results: React.FC = () => {
         <strong>Rows (length):</strong> {rows2}
         <br />
         <strong>Total rectangles:</strong> {total2}
+        <br />
+        <strong>Adjusted Total rectangles:</strong> {adjustedTotal2}
         <br />
         <strong>Remainder:</strong> {remainder2}
       </p>

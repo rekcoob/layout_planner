@@ -17,7 +17,7 @@ const InputComponent: React.FC = () => {
     <div>
       <div>
         <label>
-          Obdĺžnik (dlzka x výška):{' '}
+          Rectangle (length x width):{' '}
           <input
             type='number'
             value={rectLength}
@@ -33,7 +33,7 @@ const InputComponent: React.FC = () => {
       </div>
       <div>
         <label>
-          Format (dlzka x výška):{' '}
+          Format (length x width):{' '}
           <input
             type='number'
             value={formatLength}
