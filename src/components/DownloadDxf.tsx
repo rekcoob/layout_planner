@@ -10,12 +10,12 @@ const DownloadDXF: React.FC = () => {
   const { rectLength, rectWidth, formatLength, formatWidth } = useAppContext()
   const {
     cols1,
-    // rows1,
-    // remainder1,
+    rows1,
+    remainder1,
     adjustedTotal1,
     cols2,
     rows2,
-    // remainder2,
+    remainder2,
     adjustedTotal2,
   } = useCalculatedLayout(rectLength, rectWidth, formatLength, formatWidth)
 
@@ -29,10 +29,11 @@ const DownloadDXF: React.FC = () => {
         dxf,
         rectLength,
         rectWidth,
-        formatLength,
+        // formatLength,
         formatWidth,
-        cols1
-        // rows1
+        cols1,
+        rows1,
+        remainder1
       )
     } else {
       drawCrosswiseLayout(
@@ -40,10 +41,10 @@ const DownloadDXF: React.FC = () => {
         rectLength,
         rectWidth,
         formatLength,
-        formatWidth,
+        // formatWidth,
         cols2,
-        rows2
-        // remainder2
+        rows2,
+        remainder2
       )
     }
 

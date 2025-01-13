@@ -29,7 +29,7 @@ export const drawCrosswiseLayout = (
   }
 
   if (remainder2 < rectWidth) {
-    // Horizontal Line
+    // Final Horizontal Line
     dxf.drawLine(0, rectLength * rows2, cols2 * rectWidth, rectLength * rows2)
   } else {
     // Additional Vertical Lines
