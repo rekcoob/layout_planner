@@ -1,18 +1,18 @@
 import './App.css'
-import InputComponent from './components/InputComponent'
-import Results from './components/Results'
-// import Visual from './components/Visual'
-import DownloadDxf from './components/DownloadDxf'
+import InputForm from './components/InputForm'
+import LayoutResults from './components/LayoutResults'
+import DownloadDXFButton from './components/DownloadDXFButton'
 import { AppProvider } from './context/AppContext'
+// import Visual from './components/Visual'
 
 function App() {
   return (
     <AppProvider>
       <>
-        <h1>Layout Planner</h1>
-        <InputComponent />
-        <Results />
-        <DownloadDxf />
+        <h1 style={{ margin: '30px' }}>📐 Layout Planner </h1>
+        <InputForm />
+        <LayoutResults />
+        <DownloadDXFButton />
         {/* <Visual /> */}
       </>
     </AppProvider>

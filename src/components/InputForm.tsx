@@ -1,7 +1,8 @@
 import React from 'react'
 import { useAppContext } from '../context/AppContext'
+import styles from './InputForm.module.css'
 
-const InputComponent: React.FC = () => {
+const InputForm: React.FC = () => {
   const {
     rectLength,
     rectWidth,
@@ -14,41 +15,49 @@ const InputComponent: React.FC = () => {
   } = useAppContext()
 
   return (
-    <div>
-      <div>
-        <label>
-          Rectangle (length x width):{' '}
+    <div className={styles.formContainer}>
+      <div className={styles.inputGroup}>
+        <div className={styles.inputField}>
           <input
             type='number'
+            id='rect-length'
             value={rectLength}
             onChange={(e) => setRectLength(Number(e.target.value))}
           />
-          x
+          <label htmlFor='rect-length'>Rectangle Length</label>
+        </div>
+        <div className={styles.inputField}>
           <input
             type='number'
+            id='rect-width'
             value={rectWidth}
             onChange={(e) => setRectWidth(Number(e.target.value))}
           />
-        </label>
+          <label htmlFor='rect-width'>Rectangle Width</label>
+        </div>
       </div>
-      <div>
-        <label>
-          Format (length x width):{' '}
+      <div className={styles.inputGroup}>
+        <div className={styles.inputField}>
           <input
             type='number'
+            id='format-length'
             value={formatLength}
             onChange={(e) => setFormatLength(Number(e.target.value))}
           />
-          x
+          <label htmlFor='format-length'>Format Length</label>
+        </div>
+        <div className={styles.inputField}>
           <input
             type='number'
+            id='format-width'
             value={formatWidth}
             onChange={(e) => setFormatWidth(Number(e.target.value))}
           />
-        </label>
+          <label htmlFor='format-width'>Format Width</label>
+        </div>
       </div>
     </div>
   )
 }
 
-export default InputComponent
+export default InputForm

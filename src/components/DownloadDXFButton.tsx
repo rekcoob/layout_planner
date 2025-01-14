@@ -5,8 +5,9 @@ import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
 import { drawLengthwiseLayout } from '../utils/drawLengthWiseLayout'
 import { drawCrosswiseLayout } from '../utils/drawCrosswiseLayout'
 import { downloadBlob } from '../utils/downloadBlob'
+import styles from './DownloadDXFButton.module.css'
 
-const DownloadDXF: React.FC = () => {
+const DownloadDXFButton: React.FC = () => {
   const { rectLength, rectWidth, formatLength, formatWidth } = useAppContext()
   const {
     cols1,
@@ -57,11 +58,11 @@ const DownloadDXF: React.FC = () => {
 
   return (
     <div>
-      <button className='download-btn' onClick={generateAndDownloadDXF}>
+      <button className={styles.downloadBtn} onClick={generateAndDownloadDXF}>
         Download DXF
       </button>
     </div>
   )
 }
 
-export default DownloadDXF
+export default DownloadDXFButton
