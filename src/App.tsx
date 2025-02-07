@@ -1,6 +1,6 @@
 import './App.css'
 import InputForm from './components/InputForm'
-import LayoutResults from './components/LayoutResults'
+import Results from './components/Results'
 import DownloadDXFButton from './components/DownloadDXFButton'
 // import DownloadDXFButton2 from './components/DownloadDXFButton2'
 import { AppProvider } from './context/AppContext'
@@ -15,7 +15,7 @@ function App() {
         <MyComponent />
         <h1 style={{ margin: '30px' }}>📐 Layout Planner </h1>
         <InputForm />
-        <LayoutResults />
+        <Results />
         <DownloadDXFButton />
         <PreviewDXFButton />
         {/* <DownloadDXFButton2 /> */}
