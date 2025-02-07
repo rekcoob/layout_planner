@@ -1,36 +1,29 @@
 import React from 'react'
 import { useAppContext } from '../context/AppContext'
-// import { calculateLayout } from '../services/calculations'
 import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
 
 const LayoutResults: React.FC = () => {
   const { rectLength, rectWidth, formatLength, formatWidth } = useAppContext()
 
-  const {
-    cols1,
-    rows1,
-    total1,
-    adjustedTotal1,
-    remainder1,
-    cols2,
-    rows2,
-    total2,
-    adjustedTotal2,
-    remainder2,
-    totalRectangles,
-  } = useCalculatedLayout(rectLength, rectWidth, formatLength, formatWidth)
+  const { lengthwise, crosswise } = useCalculatedLayout(
+    rectLength,
+    rectWidth,
+    formatLength,
+    formatWidth
+  )
 
-  let bestOptionMessage
-  if (adjustedTotal1 > adjustedTotal2) {
-    bestOptionMessage = <strong>Option 1 (Lengthwise) is better.</strong>
-  } else if (adjustedTotal2 > adjustedTotal1) {
-    bestOptionMessage = <strong>Option 2 (Crosswise) is better.</strong>
-  } else {
-    bestOptionMessage = (
-      <strong>Both options produce the same number of rectangles.</strong>
-    )
-  }
-
+  const bestOptionMessage = (
+    <>
+      {lengthwise.adjustedTotal > crosswise.adjustedTotal ? (
+        <strong>Option 1 (Lengthwise) is better.</strong>
+      ) : lengthwise.adjustedTotal < crosswise.adjustedTotal ? (
+        <strong>Option 2 (Crosswise) is better.</strong>
+      ) : (
+        <strong>Both options produce the same number of rectangles.</strong>
+      )}
+    </>
+  )
+  // console.log('Layout rendered!')
   return (
     <div>
       <h3>Calculation</h3>
@@ -47,37 +40,42 @@ const LayoutResults: React.FC = () => {
         <div style={{ margin: '20px' }}>
           <h4>Option 1: Lengthwise</h4>
           <p>
-            <strong>Columns (length):</strong> {cols1}
+            <strong>Columns (length):</strong> {lengthwise.cols}
             <br />
-            <strong>Rows (width):</strong> {rows1}
+            <strong>Rows (width):</strong> {lengthwise.rows}
             <br />
-            <strong>Total rectangles:</strong> {total1}
+            <strong>Total rectangles:</strong> {lengthwise.total}
             <br />
-            <strong>Adjusted Total rectangles:</strong> {adjustedTotal1}
+            <strong>Adjusted Total rectangles:</strong>{' '}
+            {lengthwise.adjustedTotal}
             <br />
-            <strong>Remainder:</strong> {remainder1}
+            <strong>Remainder:</strong> {lengthwise.remainderLength}
           </p>
         </div>
 
         <div style={{ margin: '20px' }}>
           <h4>Option 2: Crosswise</h4>
           <p>
-            <strong>Columns (width):</strong> {cols2}
+            <strong>Columns (width):</strong> {crosswise.cols}
             <br />
-            <strong>Rows (length):</strong> {rows2}
+            <strong>Rows (length):</strong> {crosswise.rows}
             <br />
-            <strong>Total rectangles:</strong> {total2}
+            <strong>Total rectangles:</strong> {crosswise.total}
             <br />
-            <strong>Adjusted Total rectangles:</strong> {adjustedTotal2}
+            <strong>Adjusted Total rectangles:</strong>{' '}
+            {crosswise.adjustedTotal}
             <br />
-            <strong>Remainder:</strong> {remainder2}
+            <strong>Remainder:</strong> {crosswise.remainderWidth}
           </p>
         </div>
       </div>
 
       <h4>Best Option</h4>
       <p>
-        <strong>Total Rectangles:</strong> {totalRectangles}
+        <strong>Total Rectangles:</strong>{' '}
+        {lengthwise.adjustedTotal < crosswise.adjustedTotal
+          ? lengthwise.adjustedTotal
+          : crosswise.adjustedTotal}
         <br />
         {bestOptionMessage}
       </p>

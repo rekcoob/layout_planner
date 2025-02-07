@@ -1,64 +1,40 @@
 import React from 'react'
-import Drawing from 'dxf-writer'
 import { useAppContext } from '../context/AppContext'
-import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
-import { drawLengthwiseLayout } from '../utils/drawLengthWiseLayout'
-import { drawCrosswiseLayout } from '../utils/drawCrosswiseLayout'
-import { downloadBlob } from '../utils/downloadBlob'
 import styles from './DownloadDXFButton.module.css'
+import { downloadFile } from '../utils/downloadFile'
+import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
 
 const DownloadDXFButton: React.FC = () => {
   const { rectLength, rectWidth, formatLength, formatWidth } = useAppContext()
-  const {
-    cols1,
-    rows1,
-    remainder1,
-    adjustedTotal1,
-    cols2,
-    rows2,
-    remainder2,
-    adjustedTotal2,
-  } = useCalculatedLayout(rectLength, rectWidth, formatLength, formatWidth)
 
-  const isLengthwise = adjustedTotal1 >= adjustedTotal2
+  const { lengthwise, crosswise } = useCalculatedLayout(
+    rectLength,
+    rectWidth,
+    formatLength,
+    formatWidth
+  )
 
-  const generateAndDownloadDXF = () => {
-    const dxf = new Drawing()
-
-    if (isLengthwise) {
-      drawLengthwiseLayout(
-        dxf,
-        rectLength,
-        rectWidth,
-        // formatLength,
-        formatWidth,
-        cols1,
-        rows1,
-        remainder1
-      )
-    } else {
-      drawCrosswiseLayout(
-        dxf,
-        rectLength,
-        rectWidth,
-        formatLength,
-        // formatWidth,
-        cols2,
-        rows2,
-        remainder2
-      )
-    }
-
-    const dxfString = dxf.toDxfString()
-    const blob = new Blob([dxfString], { type: 'application/dxf' })
-
-    // Použijeme downloadBlob na stiahnutie DXF súboru
-    downloadBlob(blob, 'drawing.dxf')
+  const handleClick = async () => {
+    downloadFile(
+      rectLength,
+      rectWidth,
+      formatLength,
+      formatWidth,
+      lengthwise.cols,
+      lengthwise.rows,
+      lengthwise.remainderLength
+    )
   }
+
+  // console.log('Button rendered!')
 
   return (
     <div>
-      <button className={styles.downloadBtn} onClick={generateAndDownloadDXF}>
+      <button
+        className={styles.downloadBtn}
+        // onClick={() => downloadDXF(isLengthwise ? 'lengthwise' : 'crosswise')}
+        onClick={() => handleClick()}
+      >
         Download DXF
       </button>
     </div>

@@ -14,6 +14,8 @@ const InputForm: React.FC = () => {
     setFormatWidth,
   } = useAppContext()
 
+  // console.log('InputForm rendered!')
+
   return (
     <div className={styles.formContainer}>
       <div className={styles.inputGroup}>
@@ -59,5 +61,4 @@ const InputForm: React.FC = () => {
     </div>
   )
 }
-
 export default InputForm

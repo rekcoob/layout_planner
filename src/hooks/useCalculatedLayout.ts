@@ -1,26 +1,32 @@
 import { useState, useEffect } from 'react'
-import { calculateLayout, CalculationResults } from '../utils/calculateLayout'
+import { calculateLayout } from '../utils/calculateLayout'
+import { IBothResults } from '../types'
 
 export const useCalculatedLayout = (
   rectLength: number,
   rectWidth: number,
   formatLength: number,
   formatWidth: number
-): CalculationResults => {
-  const [layout, setLayout] = useState<CalculationResults>({
-    cols1: 0,
-    rows1: 0,
-    total1: 0,
-    adjustedTotal1: 0,
-    remainder1: 0,
-
-    cols2: 0,
-    rows2: 0,
-    total2: 0,
-    adjustedTotal2: 0,
-    remainder2: 0,
-
-    totalRectangles: 0,
+): IBothResults => {
+  const [layout, setLayout] = useState<IBothResults>({
+    lengthwise: {
+      cols: 0,
+      rows: 0,
+      total: 0,
+      adjustedTotal: 0,
+      remainderLength: 0,
+      remainderWidth: 0,
+    },
+    crosswise: {
+      cols: 0,
+      rows: 0,
+      total: 0,
+      adjustedTotal: 0,
+      remainderLength: 0,
+      remainderWidth: 0,
+    },
+    // bestTotalRectangles: 0,
+    // optimalOrientation: 'lengthwise',
   })
 
   useEffect(() => {

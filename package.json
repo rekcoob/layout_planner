@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "dxf-viewer": "^1.0.40",
     "dxf-writer": "^1.18.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
