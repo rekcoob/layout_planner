@@ -5,12 +5,14 @@ import DownloadDxfButton from './components/DownloadDxfButton'
 import { AppProvider } from './context/AppContext'
 // import { MyComponent } from './components/MyComponent'
 import PreviewDxfButtons from './components/PreviewDxfButtons'
+import StateChanger from './components/StateChanger'
 // import Visual from './components/Visual'
 
 function App() {
   return (
     <AppProvider>
       <>
+        <StateChanger />
         <h1 style={{ margin: '30px' }}>📐 Layout Planner </h1>
         <InputForm />
         <Results />
