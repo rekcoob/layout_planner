@@ -3,8 +3,9 @@ export interface ISingleLayout {
   rows: number
   total: number
   adjustedTotal: number
-  remainderLength: number
-  remainderWidth: number
+  // remainderLength: number
+  // remainderWidth: number
+  remainder: number
   // optimalOrientation: string
 }
 

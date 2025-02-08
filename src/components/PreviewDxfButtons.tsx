@@ -26,7 +26,7 @@ export default function PreviewDxfButtons() {
       formatWidth,
       lengthwise.cols,
       lengthwise.rows,
-      lengthwise.remainderLength
+      lengthwise.remainder
     )
 
     const blob = new Blob([dxfContent], { type: 'application/dxf' })
@@ -40,7 +40,7 @@ export default function PreviewDxfButtons() {
       formatWidth,
       crosswise.cols,
       crosswise.rows,
-      crosswise.remainderWidth
+      crosswise.remainder
     )
 
     const blob = new Blob([dxfContent], { type: 'application/dxf' })

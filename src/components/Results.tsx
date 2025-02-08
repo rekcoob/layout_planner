@@ -41,7 +41,7 @@ const LayoutResults: React.FC = () => {
             <strong>Adjusted Total rectangles:</strong>{' '}
             {lengthwise.adjustedTotal}
             <br />
-            <strong>Remainder:</strong> {lengthwise.remainderLength}
+            <strong>Remainder:</strong> {lengthwise.remainder}
           </p>
         </div>
 
@@ -57,7 +57,7 @@ const LayoutResults: React.FC = () => {
             <strong>Adjusted Total rectangles:</strong>{' '}
             {crosswise.adjustedTotal}
             <br />
-            <strong>Remainder:</strong> {crosswise.remainderWidth}
+            <strong>Remainder:</strong> {crosswise.remainder}
           </p>
         </div>
       </div>

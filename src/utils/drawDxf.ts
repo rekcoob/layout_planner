@@ -3,20 +3,18 @@ import Drawing from 'dxf-writer'
 export const drawLengthwiseLayout = (
   rectLength: number,
   rectWidth: number,
-  formatLength: number,
+  _formatLength: number,
   formatWidth: number,
   cols: number,
   rows: number,
   remainder: number
 ): string => {
-  // const { rectLength, rectWidth, formatWidth, cols, rows, remainder } = params
-  const numLinesVertical = Math.floor(formatWidth / rectLength)
+  // extraLines and sharedLine are specific to the layout (lengthwise)
+  const extraLines = Math.floor(formatWidth / rectLength)
   const sharedLine =
-    rectLength * numLinesVertical > rows * rectWidth
-      ? rectLength * numLinesVertical
+    rectLength * extraLines > rows * rectWidth
+      ? rectLength * extraLines
       : rows * rectWidth
-
-  // const numLinesHorizontal = rows
 
   const dxf = new Drawing()
 
@@ -25,38 +23,30 @@ export const drawLengthwiseLayout = (
     const y = rectWidth * i
     dxf.drawLine(0, y, cols * rectLength, y)
   }
-
   // Draw vertical lines for both (columns)
   for (let j = 0; j < cols; j++) {
     const x = rectLength * j
     dxf.drawLine(x, 0, x, rows * rectWidth)
   }
 
-  // Additional lines based on remaining space
+  // Decide if there is space for another rectangles in the opposite direction
   if (remainder < rectWidth) {
-    // Final Vertical Line
+    // Final Vertical Line if no additional rectangles
     dxf.drawLine(rectLength * cols, 0, rectLength * cols, rows * rectWidth)
   } else {
-    // Additional Horizontal Lines
-    for (let i = 0; i <= numLinesVertical; i++) {
+    // Additional Horizontal Lines - extraLines
+    for (let i = 0; i <= extraLines; i++) {
       const y = rectLength * i
       dxf.drawLine(cols * rectLength, y, cols * rectLength + rectWidth, y)
     }
     // Shared Vertical Line
-    dxf.drawLine(
-      cols * rectLength,
-      0,
-      cols * rectLength,
-      // here problem
-      // rectLength * numLinesVertical
-      sharedLine
-    )
+    dxf.drawLine(cols * rectLength, 0, cols * rectLength, sharedLine)
     // Additional Vertical Line
     dxf.drawLine(
       cols * rectLength + rectWidth,
       0,
       cols * rectLength + rectWidth,
-      rectLength * numLinesVertical
+      rectLength * extraLines
     )
   }
 
@@ -67,16 +57,16 @@ export const drawCrosswiseLayout = (
   rectLength: number,
   rectWidth: number,
   formatLength: number,
-  formatWidth: number,
+  _formatWidth: number,
   cols: number,
   rows: number,
   remainder: number
 ): string => {
-  // const { rectLength, rectWidth, formatLength, cols, rows, remainder } = params
-  const numLinesVertical = Math.floor(formatLength / rectLength)
+  // extraLines and sharedLine are specific to the layout (crosswise)
+  const extraLines = Math.floor(formatLength / rectLength)
   const sharedLine =
-    rectLength * numLinesVertical > cols * rectWidth
-      ? rectLength * numLinesVertical
+    rectLength * extraLines > cols * rectWidth
+      ? rectLength * extraLines
       : cols * rectWidth
 
   const dxf = new Drawing()
@@ -86,19 +76,19 @@ export const drawCrosswiseLayout = (
     const y = rectLength * i
     dxf.drawLine(0, y, cols * rectWidth, y)
   }
-
   // Draw vertical lines both (columns)
   for (let j = 0; j <= cols; j++) {
     const x = rectWidth * j
     dxf.drawLine(x, 0, x, rows * rectLength)
   }
 
+  // Decide if there is space for another rectangles in the opposite direction
   if (remainder < rectWidth) {
-    // Final Horizontal Line
+    // Final Horizontal Line if no additional rectangles
     dxf.drawLine(0, rectLength * rows, cols * rectWidth, rectLength * rows)
   } else {
-    // Additional Vertical Lines
-    for (let j = 0; j <= numLinesVertical; j++) {
+    // Additional Vertical Lines - extraLines
+    for (let j = 0; j <= extraLines; j++) {
       const x = rectLength * j
       dxf.drawLine(x, rows * rectLength, x, rows * rectLength + rectWidth)
     }
@@ -108,7 +98,7 @@ export const drawCrosswiseLayout = (
     dxf.drawLine(
       0,
       rows * rectLength + rectWidth,
-      numLinesVertical * rectLength,
+      extraLines * rectLength,
       rows * rectLength + rectWidth
     )
   }

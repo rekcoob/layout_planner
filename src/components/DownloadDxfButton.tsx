@@ -1,5 +1,5 @@
 import { useAppContext } from '../context/AppContext'
-import { downloadFile } from '../utils/downloadFile'
+// import { downloadFile } from '../utils/downloadFile'
 import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
 import { downloadBlob } from '../utils/downloadBlob'
 import { drawLengthwiseLayout } from '../utils/drawDxf'
@@ -22,7 +22,7 @@ export default function DownloadDxfButton() {
       formatWidth,
       lengthwise.cols,
       lengthwise.rows,
-      lengthwise.remainderLength
+      lengthwise.remainder
     )
 
     const filename = 'drawing.dxf'

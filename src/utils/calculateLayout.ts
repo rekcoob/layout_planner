@@ -10,19 +10,20 @@ function calculateLengthwiseLayout(
   const rows = Math.floor(formatWidth / rectWidth)
   const total = cols * rows
 
-  const remainderLength = formatLength - rectLength * cols
-  const remainderWidth =
-    formatWidth - rectLength * Math.floor(formatWidth / rectLength)
+  const remainder = formatLength - rectLength * cols
+  // const remainderWidth =
+  //   formatWidth - rectLength * Math.floor(formatWidth / rectLength)
 
   // Adjust total1 for remainder1 (extra row)
   let adjustedTotal = total
-  if (remainderLength >= rectWidth) {
+  if (remainder >= rectWidth) {
     // const additionalCols = Math.floor(formatWidth / rectLength)
     // adjustedTotal += additionalCols * rows
     adjustedTotal = cols * rows + Math.floor(formatWidth / rectLength)
   }
 
-  return { cols, rows, total, adjustedTotal, remainderLength, remainderWidth }
+  // return { cols, rows, total, adjustedTotal, remainderLength, remainderWidth }
+  return { cols, rows, total, adjustedTotal, remainder }
 }
 
 function calculateCrosswiseLayout(
@@ -34,18 +35,18 @@ function calculateCrosswiseLayout(
   const cols = Math.floor(formatLength / rectWidth)
   const rows = Math.floor(formatWidth / rectLength)
   const total = cols * rows
-  const remainderLength = formatLength - rectLength * cols
-  const remainderWidth = formatWidth - rectLength * rows
+  // const remainderLength = formatLength - rectLength * cols
+  const remainder = formatWidth - rectLength * rows
 
   // Adjust total for possible additional rectangles (extra row)
   let adjustedTotal = total
-  if (remainderWidth >= rectWidth) {
-    // const additionalCols = Math.floor(remainderWidth / rectWidth)
+  if (remainder >= rectWidth) {
+    // const additionalCols = Math.floor(remainder / rectWidth)
     // adjustedTotal += additionalCols * rows
     adjustedTotal = cols * rows + Math.floor(formatLength / rectLength)
   }
 
-  return { cols, rows, total, adjustedTotal, remainderLength, remainderWidth }
+  return { cols, rows, total, adjustedTotal, remainder }
 }
 
 export function calculateLayout(
