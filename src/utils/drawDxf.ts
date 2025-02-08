@@ -15,6 +15,7 @@ export const drawLengthwiseLayout = (
     rectLength * numLinesVertical > rows * rectWidth
       ? rectLength * numLinesVertical
       : rows * rectWidth
+
   // const numLinesHorizontal = rows
 
   const dxf = new Drawing()
@@ -72,45 +73,44 @@ export const drawCrosswiseLayout = (
   remainder: number
 ): string => {
   // const { rectLength, rectWidth, formatLength, cols, rows, remainder } = params
-  const numLinesVertical = Math.floor(formatLength / rectWidth)
-  // const numLinesHorizontal = cols
+  const numLinesVertical = Math.floor(formatLength / rectLength)
+  const sharedLine =
+    rectLength * numLinesVertical > cols * rectWidth
+      ? rectLength * numLinesVertical
+      : cols * rectWidth
 
   const dxf = new Drawing()
 
-  // Draw horizontal lines (rows)
+  // Draw horizontal lines both (rows)
   for (let i = 0; i < rows; i++) {
     const y = rectLength * i
-    dxf.drawLine(0, y, cols * rectWidth, y) // Draw a horizontal line for crosswise layout
+    dxf.drawLine(0, y, cols * rectWidth, y)
   }
 
-  // Draw vertical lines (columns)
+  // Draw vertical lines both (columns)
   for (let j = 0; j <= cols; j++) {
     const x = rectWidth * j
-    dxf.drawLine(x, 0, x, rows * rectLength) // Draw a vertical line for crosswise layout
+    dxf.drawLine(x, 0, x, rows * rectLength)
   }
 
-  // Draw the last horizontal line to adjust remainder for rows
   if (remainder < rectWidth) {
-    dxf.drawLine(0, rectLength * rows, cols * rectWidth, rectLength * rows) // Final horizontal line
+    // Final Horizontal Line
+    dxf.drawLine(0, rectLength * rows, cols * rectWidth, rectLength * rows)
   } else {
-    // Add extra vertical lines to handle any remainder space
+    // Additional Vertical Lines
     for (let j = 0; j <= numLinesVertical; j++) {
       const x = rectLength * j
-      dxf.drawLine(x, rows * rectLength, x, rows * rectLength + rectWidth) // Extra vertical lines
+      dxf.drawLine(x, rows * rectLength, x, rows * rectLength + rectWidth)
     }
-    // Add the shared horizontal and vertical lines for crosswise arrangement
-    dxf.drawLine(
-      0,
-      rows * rectLength,
-      numLinesVertical * rectLength,
-      rows * rectLength
-    ) // Shared horizontal line
+    // Shared Horizontal Line
+    dxf.drawLine(0, rows * rectLength, sharedLine, rows * rectLength)
+    // Additional Horizontal Line
     dxf.drawLine(
       0,
       rows * rectLength + rectWidth,
       numLinesVertical * rectLength,
       rows * rectLength + rectWidth
-    ) // Adjustment line for the remainder
+    )
   }
 
   return dxf.toDxfString()

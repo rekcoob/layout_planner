@@ -25,44 +25,24 @@ function calculateLengthwiseLayout(
   return { cols, rows, total, adjustedTotal, remainderLength, remainderWidth }
 }
 
-function calculateSingleLayout(
+function calculateCrosswiseLayout(
   formatLength: number,
   formatWidth: number,
   rectLength: number,
   rectWidth: number
 ): ISingleLayout {
-  const cols = Math.floor(formatLength / rectLength)
-  const rows = Math.floor(formatWidth / rectWidth)
+  const cols = Math.floor(formatLength / rectWidth)
+  const rows = Math.floor(formatWidth / rectLength)
   const total = cols * rows
-
   const remainderLength = formatLength - rectLength * cols
-  const remainderWidth =
-    formatWidth - rectLength * Math.floor(formatWidth / rectLength)
+  const remainderWidth = formatWidth - rectLength * rows
 
-  // Adjust total for possible additional rectangles
+  // Adjust total for possible additional rectangles (extra row)
   let adjustedTotal = total
-
-  // Pre zvyšný priestor na dĺžku skontrolujeme, či sa zmestia dodatočné obdĺžniky otočené na šírku
-  if (remainderLength >= rectWidth) {
-    const additionalCols = Math.floor(remainderLength / rectWidth)
-    adjustedTotal += additionalCols * rows
-  }
-
-  // Pre zvyšný priestor na šírku skontrolujeme, či sa zmestia dodatočné obdĺžniky otočené na dĺžku
   if (remainderWidth >= rectWidth) {
-    // napicu vzorec porovnaj s
-
-    // let adjustedTotal2 = total2
-    // if (remainder2 >= rectWidth) {
-    //   adjustedTotal2 = cols2 * rows2 + Math.floor(formatLength / rectLength)
-    // }
-    const additionalRows = Math.floor(remainderWidth / rectLength)
-    adjustedTotal += additionalRows * Math.floor(formatLength / rectWidth)
-
-    // adjustedTotal =
-    //   Math.floor(formatLength / rectWidth) *
-    //     Math.floor(formatWidth / rectLength) +
-    //   Math.floor(formatLength / rectLength)
+    // const additionalCols = Math.floor(remainderWidth / rectWidth)
+    // adjustedTotal += additionalCols * rows
+    adjustedTotal = cols * rows + Math.floor(formatLength / rectLength)
   }
 
   return { cols, rows, total, adjustedTotal, remainderLength, remainderWidth }
@@ -74,7 +54,7 @@ export function calculateLayout(
   formatLength: number,
   formatWidth: number
 ): IBothResults {
-  // Layout with rectLength and rectWidth (lengthwise)
+  // Layout (lengthwise)
   const lengthwise = calculateLengthwiseLayout(
     formatLength,
     formatWidth,
@@ -82,8 +62,8 @@ export function calculateLayout(
     rectWidth
   )
 
-  // Layout with rectWidth and rectLength (crosswise)
-  const crosswise = calculateSingleLayout(
+  // Layout (crosswise)
+  const crosswise = calculateCrosswiseLayout(
     formatLength,
     formatWidth,
     rectLength,

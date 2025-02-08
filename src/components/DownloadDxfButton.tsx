@@ -1,12 +1,10 @@
-import React from 'react'
 import { useAppContext } from '../context/AppContext'
-import styles from './DownloadDXFButton.module.css'
 import { downloadFile } from '../utils/downloadFile'
 import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
 import { downloadBlob } from '../utils/downloadBlob'
 import { drawLengthwiseLayout } from '../utils/drawDxf'
 
-export default function DownloadDXFButton() {
+export default function DownloadDxfButton() {
   const { rectLength, rectWidth, formatLength, formatWidth } = useAppContext()
 
   const { lengthwise, crosswise } = useCalculatedLayout(
@@ -34,14 +32,14 @@ export default function DownloadDXFButton() {
   }
 
   return (
-    <div>
+    <>
       <button
-        className={styles.downloadBtn}
+        className='primary'
         // onClick={() => downloadDXF(isLengthwise ? 'lengthwise' : 'crosswise')}
         onClick={() => handleClick()}
       >
         Download DXF
       </button>
-    </div>
+    </>
   )
 }

@@ -1,8 +1,7 @@
 // context/AppContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from 'react'
-// import { Rectangle, LayoutDimensions } from '../types'
 
-interface AppState {
+interface IAppState {
   rectLength: number
   rectWidth: number
   formatLength: number
@@ -13,7 +12,7 @@ interface AppState {
   setFormatWidth: (value: number) => void
 }
 
-const AppContext = createContext<AppState | null>(null)
+const AppContext = createContext<IAppState | null>(null)
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -22,17 +21,18 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [rectLength, setRectLength] = useState<number>(240)
   const [rectWidth, setRectWidth] = useState<number>(100)
   // Format dimensions
-  const [formatLength, setFormatLength] = useState<number>(2020)
-  const [formatWidth, setFormatWidth] = useState<number>(1000)
+  const [formatLength, setFormatLength] = useState<number>(1995)
+  const [formatWidth, setFormatWidth] = useState<number>(880)
 
   // rec 240x100 form 1995 1000 => lengthwise better option
   // rec 240x100 form 2020 1000 => lengthwise w remainder
   // rec 20x9 form 210 100 => lengthwise w remainder w bigger shared Line
 
-  // rec 240x100 form 1995x880 => crosswise better option
-  // rec 240x100 form 1995x740 => crosswise no remainder
+  // rec 240x100 form 1995 740 => crosswise
+  // rec 240x100 form 1995 880 => crosswise w reminder
+  // rec 240x100 form 1900 880 => crosswise w reminder
 
-  const value: AppState = {
+  const value: IAppState = {
     rectLength,
     rectWidth,
     formatLength,
@@ -42,11 +42,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     setFormatLength,
     setFormatWidth,
   }
-
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
 
-export const useAppContext = (): AppState => {
+export const useAppContext = (): IAppState => {
   const context = useContext(AppContext)
   if (!context) {
     throw new Error('useAppContext must be used within an AppProvider')

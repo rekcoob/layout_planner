@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { DxfViewer } from 'dxf-viewer'
 import { useAppContext } from '../context/AppContext'
-import { downloadFile } from '../utils/downloadFile'
+// import { downloadFile } from '../utils/downloadFile'
 import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
 import { drawLengthwiseLayout, drawCrosswiseLayout } from '../utils/drawDxf'
 
-export default function PreviewDXFButton() {
+export default function PreviewDxfButtons() {
   const [showDxf, setShowDxf] = useState(false)
   const [dxfBlob, setDxfBlob] = useState<Blob | null>(null)
 
@@ -27,6 +27,20 @@ export default function PreviewDXFButton() {
       lengthwise.cols,
       lengthwise.rows,
       lengthwise.remainderLength
+    )
+
+    const blob = new Blob([dxfContent], { type: 'application/dxf' })
+    setDxfBlob(blob)
+  }
+  const handleClickCrosswise = async () => {
+    const dxfContent = drawCrosswiseLayout(
+      rectLength,
+      rectWidth,
+      formatLength,
+      formatWidth,
+      crosswise.cols,
+      crosswise.rows,
+      crosswise.remainderWidth
     )
 
     const blob = new Blob([dxfContent], { type: 'application/dxf' })
@@ -58,24 +72,32 @@ export default function PreviewDXFButton() {
 
   return (
     <div>
-      <h2>DXF Viewer</h2>
       <button
         onClick={() => {
           handleClick()
           setShowDxf(true)
         }}
-        className='btn-primary'
+        className='btn-sm secondary '
       >
-        Zobraziť DXF (Lengthwise)
+        Preview DXF (Lengthwise)
       </button>
       <button
         onClick={() => {
+          handleClickCrosswise()
           setShowDxf(true)
         }}
-        className='btn-primary'
+        className='btn-sm secondary'
       >
-        Zobraziť DXF (Crosswise)
+        Preview DXF (Crosswise)
       </button>
+      {/* <div
+        style={{
+          width: '800px',
+          height: '600px',
+          marginTop: '20px',
+          backgroundColor: 'black',
+        }}
+      ></div> */}
       {showDxf && (
         <div
           id='dxf-viewer-container'

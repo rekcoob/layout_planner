@@ -1,26 +1,38 @@
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
-body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  display: flex;
-  place-items: center;
-  /* min-width: 320px; */
-  min-height: 100vh;
-}
-
+/* Color Scheme */
 :root {
+  /* original react :root */
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+
+  /* Default theme (dark mode) */
+  --primary-color: #1e857b;
+  --secondary-color: #980ffa;
+  --text-color: #e8e6e3;
+  --background-color: #242424;
+}
+.primary {
+  /* color: var(--primary-color); */
+  background-color: var(--primary-color);
+}
+.secondary {
+  /* color: var(--secondary-color); */
+  background-color: var(--secondary-color);
 }
 
+body {
+  /* mb another font  */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* line-height: 1.5; */
+  /* font-weight: 400; */
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
 a {
   text-decoration: none;
 }
@@ -31,7 +43,7 @@ img {
   max-width: 100%;
 }
 
-/* Css Utils Classes */
+/* Frameworks Classes */
 .flex {
   display: flex;
 }
@@ -42,45 +54,14 @@ img {
 .center {
   align-items: center;
   justify-content: center;
+  /* more items  */
 }
-.border {
-  border: none;
-}
-.form-group {
+/* .form-group {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* DownloadDXFButton.module.css */
-.btn-primary {
-  display: inline-block;
-  background-color: #26a69a; /* Teal shade */
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  padding: 12px 24px;
-  margin: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-}
-
-.btn-primary:hover {
-  background-color: #2bbbad; /* Lighter teal on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.downloadBtn:active {
-  background-color: #00897b; /* Darker teal on click */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.downloadBtn:disabled {
-  background-color: #bdbdbd; /* Gray for disabled */
-  cursor: not-allowed;
-  box-shadow: none;
+} */
+.border {
+  border: solid 1px var(--primary-color);
 }
