@@ -35,6 +35,6 @@ export const useCalculatedLayout = (
     )
     setLayout(results)
   }, [rectLength, rectWidth, formatLength, formatWidth])
-
+  console.log('useCalculatedLayout')
   return layout
 }

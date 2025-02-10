@@ -1,16 +1,16 @@
-# Layout Planner
+# 📐 Layout Planner
 
 Layout Planner is a React application that calculates and generates the most efficient layout of rectangles within a given format. The output can be previewed and downloaded as a DXF file.
 
-**Live Demo**: [Layout Planner on Netlify](https://layout-planner.netlify.app)
+🌐 **Live Demo**: [Layout Planner on Netlify](https://layout-planner.netlify.app)
 
-## Features
+## ✨ Features
 
-- **Optimal Layout Calculation**:
+- 📊 **Optimal Layout Calculation**:
   - Comparison of two options (lengthwise and crosswise orientation)
   - Calculation of the total number of rectangles and leftover material
   - Recommendation of the best option
-- **DXF Preview and Export**:
+- 🎨 **DXF Preview and Export**:
   - Visualization of the layout directly in the application
   - Option to download the DXF file
 
@@ -20,7 +20,7 @@ Layout Planner is a React application that calculates and generates the most eff
 - 📏 **dxf-writer** – DXF file generation
 - 🎨 **CSS** – Styling -->
 
-## Installation and Setup
+## 🚀 Quick Start
 
 1. Clone the repository:
    ```bash
@@ -31,10 +31,15 @@ Layout Planner is a React application that calculates and generates the most eff
    ```bash
    npm install
    ```
-3. Start the application:
+   <!-- 3. Start the application:
+      ```bash
+      npm run dev
+      ``` -->
+3. **Run Locally**:
    ```bash
    npm run dev
    ```
+   Visit `http://localhost:5173`
 
 <!-- ## 📷 Screenshot
 

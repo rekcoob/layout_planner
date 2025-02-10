@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import ReactGA from 'react-ga4'
 import './App.css'
 import { AppProvider } from './context/AppContext'
 import InputForm from './components/InputForm'
@@ -7,6 +9,10 @@ import PreviewDxfButtons from './components/PreviewDxfButtons'
 // import StateChanger from './components/StateChanger'
 
 function App() {
+  useEffect(() => {
+    ReactGA.send({ hitType: 'pageview', page: window.location.pathname })
+  }, [])
+
   return (
     <AppProvider>
       <div className='container'>

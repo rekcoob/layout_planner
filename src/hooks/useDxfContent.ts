@@ -50,6 +50,6 @@ export const useDxfContent = () => {
     const dxfContent = getDxfContent(type)
     return new Blob([dxfContent], { type: 'application/dxf' })
   }
-
+  console.log('getdxfcontext')
   return { getDxfContent, getDxfBlob }
 }

@@ -83,6 +83,8 @@ export default function PreviewDxfButtons() {
     setShowDxf(true)
   }
 
+  console.log('[Preview Button] rendered')
+
   return (
     <div>
       <button

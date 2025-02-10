@@ -60,7 +60,7 @@ export function calculateLayout(
     rectLength,
     rectWidth
   )
-
+  console.log('calculate  layout...') // Sledujeme, kedy sa vykonáva výpočet
   const results = { lengthwise, crosswise }
   return results
 }
