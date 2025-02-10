@@ -1,7 +1,6 @@
-import React from 'react'
 import { useAppContext } from '../context/AppContext'
 
-const InputForm: React.FC = () => {
+export default function InputForm() {
   const {
     rectLength,
     rectWidth,
@@ -51,4 +50,3 @@ const InputForm: React.FC = () => {
     </div>
   )
 }
-export default InputForm

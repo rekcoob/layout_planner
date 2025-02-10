@@ -1,9 +1,8 @@
-import React from 'react'
 import { useAppContext } from '../context/AppContext'
 
 // This Component is only for testing purpose
 
-const StateChanger: React.FC = () => {
+export default function StateChanger() {
   const { setRectLength, setRectWidth, setFormatLength, setFormatWidth } =
     useAppContext()
 
@@ -80,5 +79,3 @@ const StateChanger: React.FC = () => {
     </div>
   )
 }
-
-export default StateChanger

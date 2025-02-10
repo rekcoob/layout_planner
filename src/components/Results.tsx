@@ -1,8 +1,7 @@
-import React from 'react'
 import { useAppContext } from '../context/AppContext'
 import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
 
-const LayoutResults: React.FC = () => {
+export default function LayoutResults() {
   const { rectLength, rectWidth, formatLength, formatWidth } = useAppContext()
   const { lengthwise, crosswise } = useCalculatedLayout(
     rectLength,
@@ -14,21 +13,26 @@ const LayoutResults: React.FC = () => {
   const bestOptionMessage = (
     <>
       {lengthwise.adjustedTotal > crosswise.adjustedTotal ? (
-        <strong>Option 1 (Lengthwise) is better.</strong>
+        <>
+          <span style={{ color: 'var(--primary-color' }}>Lengthwise</span> is
+          better.
+        </>
       ) : lengthwise.adjustedTotal < crosswise.adjustedTotal ? (
-        <strong>Option 2 (Crosswise) is better.</strong>
+        <>
+          <span style={{ color: 'var(--primary-color' }}>Crosswise</span> is
+          better.
+        </>
       ) : (
-        <strong>Both options produce the same number of rectangles.</strong>
+        <>Both options produce the same number of rectangles.</>
       )}
     </>
   )
   // console.log('Layout rendered!')
   return (
-    <div className='results'>
-      <h2>Layout Calculation </h2>
-      {/* <div className='flex center'> */}
-      <div className='flex center'>
-        {/* <div style={{ margin: '20px' }}> */}
+    <div>
+      <h2 style={{ marginTop: '5px' }}>Calculation </h2>
+
+      <div className='results'>
         <div className='single-result'>
           <h3>Lengthwise</h3>
           <p>
@@ -36,13 +40,10 @@ const LayoutResults: React.FC = () => {
             <br />
             <strong>Rows (width):</strong> {lengthwise.rows}
             <br />
-            <strong>Total rectangles:</strong> {lengthwise.total}
+            {/* <strong>Total rectangles:</strong> {lengthwise.total} */}
+            <strong>Total rectangles:</strong> {lengthwise.adjustedTotal}
             <br />
-            {/* OREZ */}
-            {/* Toto je iba na test potom to pojde prec */}
-            <strong>Adjusted Total rectangles:</strong>{' '}
-            {lengthwise.adjustedTotal}
-            <br />
+            {/* Cut Remainder */}
             <strong>Remainder:</strong> {lengthwise.remainder}
           </p>
         </div>
@@ -54,10 +55,8 @@ const LayoutResults: React.FC = () => {
             <br />
             <strong>Rows (length):</strong> {crosswise.rows}
             <br />
-            <strong>Total rectangles:</strong> {crosswise.total}
-            <br />
-            <strong>Adjusted Total rectangles:</strong>{' '}
-            {crosswise.adjustedTotal}
+            {/* <strong>Total rectangles:</strong> {crosswise.total} */}
+            <strong>Total rectangles:</strong> {crosswise.adjustedTotal}
             <br />
             <strong>Remainder:</strong> {crosswise.remainder}
           </p>
@@ -66,8 +65,7 @@ const LayoutResults: React.FC = () => {
 
       <div className='best-option'>
         <h3>Best Option</h3>
-        {/* mb different color ?  */}
-        <p>{bestOptionMessage}</p>
+        <h2>{bestOptionMessage}</h2>
         <p>
           <strong>Total Rectangles:</strong>{' '}
           {lengthwise.adjustedTotal > crosswise.adjustedTotal
@@ -79,5 +77,3 @@ const LayoutResults: React.FC = () => {
     </div>
   )
 }
-
-export default LayoutResults

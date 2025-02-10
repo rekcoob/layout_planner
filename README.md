@@ -1,50 +1,49 @@
-# React + TypeScript + Vite
+# Layout Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Layout Planner is a React application that calculates and generates the most efficient layout of rectangles within a given format. The output can be previewed and downloaded as a DXF file.
 
-Currently, two official plugins are available:
+**Live Demo**: [Layout Planner on Netlify](https://layout-planner.netlify.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Optimal Layout Calculation**:
+  - Comparison of two options (lengthwise and crosswise orientation)
+  - Calculation of the total number of rectangles and leftover material
+  - Recommendation of the best option
+- **DXF Preview and Export**:
+  - Visualization of the layout directly in the application
+  - Option to download the DXF file
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<!-- ## 🛠️ Technologies
 
-- Configure the top-level `parserOptions` property like this:
+- ⚛️ **React** – Frontend framework
+- 📏 **dxf-writer** – DXF file generation
+- 🎨 **CSS** – Styling -->
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Installation and Setup
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/layout-planner.git
+   cd layout-planner
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the application:
+   ```bash
+   npm run dev
+   ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+<!-- ## 📷 Screenshot
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+![Layout Planner Screenshot](./screenshot.png)
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+✉️ If you have any questions or suggestions for improvement, feel free to contact me! -->

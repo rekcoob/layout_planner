@@ -13,15 +13,14 @@
   /* Default theme (dark mode) */
   --primary-color: #1e857b;
   --secondary-color: #980ffa;
+  --text-color: #e8e6e3;
+  --background-color: #242424;
 
   --teal-green: #1e857b;
   --burnt-orange: #e67e22;
   --golden-mustard: #f4a261;
   --charcoal-gray: #4a4a4a;
   --pearl-white: #f4f4f4;
-
-  --text-color: #e8e6e3;
-  --background-color: #242424;
 }
 .primary {
   /* color: var(--primary-color); */

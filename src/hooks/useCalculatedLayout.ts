@@ -15,8 +15,6 @@ export const useCalculatedLayout = (
       total: 0,
       adjustedTotal: 0,
       remainder: 0,
-      // remainderLength: 0,
-      // remainderWidth: 0,
     },
     crosswise: {
       cols: 0,
@@ -24,11 +22,7 @@ export const useCalculatedLayout = (
       total: 0,
       adjustedTotal: 0,
       remainder: 0,
-      // remainderLength: 0,
-      // remainderWidth: 0,
     },
-    // bestTotalRectangles: 0,
-    // optimalOrientation: 'lengthwise',
   })
 
   useEffect(() => {

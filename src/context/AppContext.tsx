@@ -18,11 +18,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   // Rectangle dimensions
-  const [rectLength, setRectLength] = useState<number>(240)
+  const [rectLength, setRectLength] = useState<number>(200)
   const [rectWidth, setRectWidth] = useState<number>(100)
   // Format dimensions
-  const [formatLength, setFormatLength] = useState<number>(1995)
-  const [formatWidth, setFormatWidth] = useState<number>(880)
+  const [formatLength, setFormatLength] = useState<number>(2000)
+  const [formatWidth, setFormatWidth] = useState<number>(1000)
 
   const value: IAppState = {
     rectLength,
