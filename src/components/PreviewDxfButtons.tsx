@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { DxfViewer, DxfViewerLoadParams, DxfViewerOptions } from 'dxf-viewer'
-import { useAppContext } from '../context/AppContext'
-import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
-import { drawLengthwiseLayout, drawCrosswiseLayout } from '../utils/drawDxf'
+import { useDxfContent } from '../hooks/useDxfContent'
 import { ICustomDxfViewerOptions, ICustomDxfLoadParams } from '../types'
 
 export default function PreviewDxfButtons() {
@@ -14,13 +12,7 @@ export default function PreviewDxfButtons() {
   const containerRef = useRef<HTMLDivElement>(null)
   const viewerRef = useRef<DxfViewer | null>(null)
 
-  const { rectLength, rectWidth, formatLength, formatWidth } = useAppContext()
-  const { lengthwise, crosswise } = useCalculatedLayout(
-    rectLength,
-    rectWidth,
-    formatLength,
-    formatWidth
-  )
+  const { getDxfContent } = useDxfContent()
 
   useEffect(() => {
     // console.log('🔄 useEffect triggered')
@@ -34,7 +26,6 @@ export default function PreviewDxfButtons() {
     if (dxfBlob && showDxf && containerRef.current) {
       // console.log('✅ Creating new DxfViewer instance')
       // Cast the options to DxfViewerOptions to satisfy TypeScript
-
       const options: ICustomDxfViewerOptions = {
         autoResize: true,
         antialias: false,
@@ -43,12 +34,10 @@ export default function PreviewDxfButtons() {
         containerRef.current,
         options as DxfViewerOptions
       )
-
       const url = URL.createObjectURL(dxfBlob)
       const loadParams: ICustomDxfLoadParams = {
         url: URL.createObjectURL(dxfBlob),
       }
-
       dxfViewer
         .Load(loadParams as DxfViewerLoadParams)
         .catch((error) => console.error('Failed to load DXF:', error))
@@ -66,31 +55,15 @@ export default function PreviewDxfButtons() {
     }
   }, [dxfBlob, showDxf])
 
-  const handleClick = async () => {
-    const dxfContent = drawLengthwiseLayout(
-      rectLength,
-      rectWidth,
-      formatLength,
-      formatWidth,
-      lengthwise.cols,
-      lengthwise.rows,
-      lengthwise.remainder
-    )
+  const handleClickLengthwise = async () => {
+    const dxfContent = getDxfContent('lengthwise')
     const blob = new Blob([dxfContent], { type: 'application/dxf' })
     setDxfBlob(blob)
     setActiveButton('lengthwise')
   }
 
   const handleClickCrosswise = async () => {
-    const dxfContent = drawCrosswiseLayout(
-      rectLength,
-      rectWidth,
-      formatLength,
-      formatWidth,
-      crosswise.cols,
-      crosswise.rows,
-      crosswise.remainder
-    )
+    const dxfContent = getDxfContent('crosswise')
     const blob = new Blob([dxfContent], { type: 'application/dxf' })
     setDxfBlob(blob)
     setActiveButton('crosswise')
@@ -100,7 +73,7 @@ export default function PreviewDxfButtons() {
     <div>
       <button
         onClick={() => {
-          handleClick()
+          handleClickLengthwise()
           setShowDxf(true)
         }}
         className={`btn-sm ${activeButton === 'lengthwise' ? 'active' : ''}`}
@@ -125,6 +98,7 @@ export default function PreviewDxfButtons() {
             height: '500px',
             justifySelf: 'center',
             marginTop: '1rem',
+            overflow: 'hidden',
           }}
         />
       )}
