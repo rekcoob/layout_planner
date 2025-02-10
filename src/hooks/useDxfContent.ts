@@ -46,5 +46,10 @@ export const useDxfContent = () => {
         )
   }
 
-  return { getDxfContent }
+  const getDxfBlob = (type?: 'lengthwise' | 'crosswise') => {
+    const dxfContent = getDxfContent(type)
+    return new Blob([dxfContent], { type: 'application/dxf' })
+  }
+
+  return { getDxfContent, getDxfBlob }
 }

@@ -12,7 +12,8 @@ export default function PreviewDxfButtons() {
   const containerRef = useRef<HTMLDivElement>(null)
   const viewerRef = useRef<DxfViewer | null>(null)
 
-  const { getDxfContent } = useDxfContent()
+  // const { getDxfContent } = useDxfContent()
+  const { getDxfBlob } = useDxfContent()
 
   useEffect(() => {
     // console.log('🔄 useEffect triggered')
@@ -35,9 +36,8 @@ export default function PreviewDxfButtons() {
         options as DxfViewerOptions
       )
       const url = URL.createObjectURL(dxfBlob)
-      const loadParams: ICustomDxfLoadParams = {
-        url: URL.createObjectURL(dxfBlob),
-      }
+      const loadParams: ICustomDxfLoadParams = { url }
+
       dxfViewer
         .Load(loadParams as DxfViewerLoadParams)
         .catch((error) => console.error('Failed to load DXF:', error))
@@ -56,17 +56,17 @@ export default function PreviewDxfButtons() {
   }, [dxfBlob, showDxf])
 
   const handleClickLengthwise = async () => {
-    const dxfContent = getDxfContent('lengthwise')
-    const blob = new Blob([dxfContent], { type: 'application/dxf' })
+    const blob = getDxfBlob('lengthwise')
     setDxfBlob(blob)
     setActiveButton('lengthwise')
+    setShowDxf(true)
   }
 
   const handleClickCrosswise = async () => {
-    const dxfContent = getDxfContent('crosswise')
-    const blob = new Blob([dxfContent], { type: 'application/dxf' })
+    const blob = getDxfBlob('crosswise')
     setDxfBlob(blob)
     setActiveButton('crosswise')
+    setShowDxf(true)
   }
 
   return (
@@ -74,7 +74,6 @@ export default function PreviewDxfButtons() {
       <button
         onClick={() => {
           handleClickLengthwise()
-          setShowDxf(true)
         }}
         className={`btn-sm ${activeButton === 'lengthwise' ? 'active' : ''}`}
       >
@@ -83,7 +82,6 @@ export default function PreviewDxfButtons() {
       <button
         onClick={() => {
           handleClickCrosswise()
-          setShowDxf(true)
         }}
         className={`btn-sm ${activeButton === 'crosswise' ? 'active' : ''}`}
       >
