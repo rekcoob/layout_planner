@@ -11,16 +11,14 @@ import StateChanger from './components/StateChanger'
 function App() {
   return (
     <AppProvider>
-      <>
+      <div className='container'>
         <StateChanger />
         <h1 style={{ margin: '30px' }}>📐 Layout Planner </h1>
         <InputForm />
         <Results />
-        <PreviewDxfButtons />
         <DownloadDxfButton />
-        {/* <MyComponent /> */}
-        {/* <Visual /> */}
-      </>
+        <PreviewDxfButtons />
+      </div>
     </AppProvider>
   )
 }

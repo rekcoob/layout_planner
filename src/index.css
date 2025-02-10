@@ -13,6 +13,13 @@
   /* Default theme (dark mode) */
   --primary-color: #1e857b;
   --secondary-color: #980ffa;
+
+  --teal-green: #1e857b;
+  --burnt-orange: #e67e22;
+  --golden-mustard: #f4a261;
+  --charcoal-gray: #4a4a4a;
+  --pearl-white: #f4f4f4;
+
   --text-color: #e8e6e3;
   --background-color: #242424;
 }
@@ -27,7 +34,17 @@
 
 body {
   /* mb another font  */
+  /* Inter (Moderný, jemné okraje, veľmi čitateľný) */
+  /* font-family: 'Roboto', sans-serif; */
+  /* font-family: 'Space Grotesk', sans-serif; */
+  /* font-family: 'Fira Sans', sans-serif; */
+  /* font-family: 'Inter', sans-serif; */
+  /* font-family: 'Poppins', system-ui, Helvetica, Arial, sans-serif; */
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  /* font-weight: 400; */
+  line-height: 1.5;
+
   /* line-height: 1.5; */
   /* font-weight: 400; */
   background-color: var(--background-color);
@@ -64,4 +81,7 @@ img {
 } */
 .border {
   border: solid 1px var(--primary-color);
+  text-align: center;
+  justify-self: center;
+  /* border-radius: 12px; */
 }

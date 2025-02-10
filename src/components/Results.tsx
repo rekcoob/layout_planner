@@ -24,11 +24,13 @@ const LayoutResults: React.FC = () => {
   )
   // console.log('Layout rendered!')
   return (
-    <div>
+    <div className='results'>
       <h2>Layout Calculation </h2>
+      {/* <div className='flex center'> */}
       <div className='flex center'>
-        <div style={{ margin: '20px' }}>
-          <h4>Lengthwise</h4>
+        {/* <div style={{ margin: '20px' }}> */}
+        <div className='single-result'>
+          <h3>Lengthwise</h3>
           <p>
             <strong>Columns (length):</strong> {lengthwise.cols}
             <br />
@@ -45,8 +47,8 @@ const LayoutResults: React.FC = () => {
           </p>
         </div>
 
-        <div style={{ margin: '20px' }}>
-          <h4>Crosswise</h4>
+        <div>
+          <h3>Crosswise</h3>
           <p>
             <strong>Columns (width):</strong> {crosswise.cols}
             <br />
@@ -62,16 +64,18 @@ const LayoutResults: React.FC = () => {
         </div>
       </div>
 
-      <h4>Best Option</h4>
-      {/* mb different color ?  */}
-      <p>{bestOptionMessage}</p>
-      <p>
-        <strong>Total Rectangles:</strong>{' '}
-        {lengthwise.adjustedTotal > crosswise.adjustedTotal
-          ? lengthwise.adjustedTotal
-          : crosswise.adjustedTotal}
-        <br />
-      </p>
+      <div className='best-option'>
+        <h3>Best Option</h3>
+        {/* mb different color ?  */}
+        <p>{bestOptionMessage}</p>
+        <p>
+          <strong>Total Rectangles:</strong>{' '}
+          {lengthwise.adjustedTotal > crosswise.adjustedTotal
+            ? lengthwise.adjustedTotal
+            : crosswise.adjustedTotal}
+          <br />
+        </p>
+      </div>
     </div>
   )
 }
