@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { DxfViewer, DxfViewerLoadParams, DxfViewerOptions } from 'dxf-viewer'
 import { useDxfContent } from '../hooks/useDxfContent'
+import TagManager from 'react-gtm-module'
 import { ICustomDxfViewerOptions, ICustomDxfLoadParams } from '../types'
 
 export default function PreviewDxfButtons() {
@@ -56,6 +57,12 @@ export default function PreviewDxfButtons() {
   }, [dxfBlob, showDxf])
 
   const handleClickLengthwise = async () => {
+    TagManager.dataLayer({
+      dataLayer: {
+        event: 'button_click',
+        button_name: 'Preview Legthwise',
+      },
+    })
     const blob = getDxfBlob('lengthwise')
     setDxfBlob(blob)
     setActiveButton('lengthwise')
@@ -63,6 +70,13 @@ export default function PreviewDxfButtons() {
   }
 
   const handleClickCrosswise = async () => {
+    TagManager.dataLayer({
+      dataLayer: {
+        event: 'button_click',
+        button_name: 'Preview Crosswise',
+      },
+    })
+
     const blob = getDxfBlob('crosswise')
     setDxfBlob(blob)
     setActiveButton('crosswise')
