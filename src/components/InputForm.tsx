@@ -47,22 +47,6 @@ const InputForm: React.FC = () => {
           value={formatWidth}
           onChange={(e) => setFormatWidth(Number(e.target.value))}
         />
-        {/* <div className='input-field'>
-          <label htmlFor='format-length'>Length</label>
-          <input
-            type='number'
-            value={formatLength}
-            onChange={(e) => setFormatLength(Number(e.target.value))}
-          />
-        </div>
-        <div className='input-field'>
-          <label htmlFor='format-width'>Width</label>
-          <input
-            type='number'
-            value={formatWidth}
-            onChange={(e) => setFormatWidth(Number(e.target.value))}
-          />
-        </div> */}
       </div>
     </div>
   )

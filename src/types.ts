@@ -25,6 +25,26 @@ export interface LayoutDimensions {
   format: Rectangle
 }
 
+// types/dxfViewer.ts
+export interface ICustomDxfViewerOptions {
+  canvasWidth?: number
+  canvasHeight?: number
+  autoResize?: boolean
+  clearAlpha?: number
+  antialias?: boolean
+  pointSize?: number
+  colorCorrection?: boolean
+  blackWhiteInversion?: boolean
+  fileEncoding?: string
+  retainParsedDxf?: boolean
+  preserveDrawingBuffer?: boolean
+}
+
+// Pomocný typ pre load parametre
+export interface ICustomDxfLoadParams {
+  url: string
+}
+
 // export interface LayoutCalculation {
 //   columns: number
 //   rows: number

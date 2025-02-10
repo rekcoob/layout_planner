@@ -33,8 +33,6 @@
 }
 
 body {
-  /* mb another font  */
-  /* Inter (Moderný, jemné okraje, veľmi čitateľný) */
   /* font-family: 'Roboto', sans-serif; */
   /* font-family: 'Space Grotesk', sans-serif; */
   /* font-family: 'Fira Sans', sans-serif; */
@@ -45,8 +43,6 @@ body {
   /* font-weight: 400; */
   line-height: 1.5;
 
-  /* line-height: 1.5; */
-  /* font-weight: 400; */
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -81,7 +77,4 @@ img {
 } */
 .border {
   border: solid 1px var(--primary-color);
-  text-align: center;
-  justify-self: center;
-  /* border-radius: 12px; */
 }

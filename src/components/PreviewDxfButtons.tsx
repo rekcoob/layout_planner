@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
-import { DxfViewer, DxfViewerOptions } from 'dxf-viewer'
+import { DxfViewer, DxfViewerLoadParams, DxfViewerOptions } from 'dxf-viewer'
 import { useAppContext } from '../context/AppContext'
 import { useCalculatedLayout } from '../hooks/useCalculatedLayout'
 import { drawLengthwiseLayout, drawCrosswiseLayout } from '../utils/drawDxf'
+import { ICustomDxfViewerOptions, ICustomDxfLoadParams } from '../types'
 
 export default function PreviewDxfButtons() {
   const [dxfBlob, setDxfBlob] = useState<Blob | null>(null)
   const [showDxf, setShowDxf] = useState(false)
-  const [active, setActive] = useState(false)
   const [activeButton, setActiveButton] = useState<
     'lengthwise' | 'crosswise' | null
   >(null)
@@ -22,20 +22,6 @@ export default function PreviewDxfButtons() {
     formatWidth
   )
 
-  const options: DxfViewerOptions = {
-    // canvasWidth: 400, // Default canvas width if not using autoResize
-    // canvasHeight: 300, // Default canvas height if not using autoResize
-    autoResize: true, // Set to true to automatically resize with container
-    // clearAlpha: 1.0, // Background opacity
-    antialias: false, // Enable antialiasing
-    // pointSize: 2, // Size of point entities
-    // colorCorrection: false, // Adjust colors for visibility
-    // blackWhiteInversion: true, // Invert black/white for visibility
-    // fileEncoding: 'utf-8', // DXF file encoding
-    // retainParsedDxf: true,
-    // preserveDrawingBuffer: true,
-  }
-
   useEffect(() => {
     // console.log('🔄 useEffect triggered')
 
@@ -47,11 +33,24 @@ export default function PreviewDxfButtons() {
     }
     if (dxfBlob && showDxf && containerRef.current) {
       // console.log('✅ Creating new DxfViewer instance')
-      const dxfViewer = new DxfViewer(containerRef.current, options)
+      // Cast the options to DxfViewerOptions to satisfy TypeScript
+
+      const options: ICustomDxfViewerOptions = {
+        autoResize: true,
+        antialias: false,
+      }
+      const dxfViewer = new DxfViewer(
+        containerRef.current,
+        options as DxfViewerOptions
+      )
 
       const url = URL.createObjectURL(dxfBlob)
+      const loadParams: ICustomDxfLoadParams = {
+        url: URL.createObjectURL(dxfBlob),
+      }
+
       dxfViewer
-        .Load({ url })
+        .Load(loadParams as DxfViewerLoadParams)
         .catch((error) => console.error('Failed to load DXF:', error))
         .finally(() => URL.revokeObjectURL(url))
 
@@ -102,11 +101,8 @@ export default function PreviewDxfButtons() {
       <button
         onClick={() => {
           handleClick()
-          setActive(true)
           setShowDxf(true)
         }}
-        // className={`btn-sm ${active ? 'active' : ''}`}
-        // className='btn-sm '
         className={`btn-sm ${activeButton === 'lengthwise' ? 'active' : ''}`}
       >
         Preview Lengthwise
@@ -116,7 +112,6 @@ export default function PreviewDxfButtons() {
           handleClickCrosswise()
           setShowDxf(true)
         }}
-        // className='btn-ff'
         className={`btn-sm ${activeButton === 'crosswise' ? 'active' : ''}`}
       >
         Preview Crosswise
@@ -126,26 +121,13 @@ export default function PreviewDxfButtons() {
           ref={containerRef}
           className='border'
           style={{
-            width: '80%',
+            width: '70%',
             height: '500px',
-            // marginTop: '1rem',
+            justifySelf: 'center',
+            marginTop: '1rem',
           }}
         />
       )}
     </div>
   )
-}
-
-const options: DxfViewerOptions = {
-  canvasWidth: 400, // Default canvas width if not using autoResize
-  canvasHeight: 300, // Default canvas height if not using autoResize
-  autoResize: true, // Set to true to automatically resize with container
-  clearAlpha: 1.0, // Background opacity
-  antialias: true, // Enable antialiasing
-  pointSize: 2, // Size of point entities
-  colorCorrection: false, // Adjust colors for visibility
-  blackWhiteInversion: true, // Invert black/white for visibility
-  fileEncoding: 'utf-8', // DXF file encoding
-  retainParsedDxf: true,
-  preserveDrawingBuffer: true,
 }

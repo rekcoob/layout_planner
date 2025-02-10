@@ -44,7 +44,7 @@ export default function DownloadDxfButton() {
 
   return (
     <>
-      <button className='primary' onClick={() => handleClick()}>
+      <button className='btn primary' onClick={() => handleClick()}>
         Download DXF
       </button>
     </>
