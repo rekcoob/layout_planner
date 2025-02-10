@@ -60,7 +60,7 @@ export function calculateLayout(
     rectLength,
     rectWidth
   )
-
+  // console.log('calculate  layout...')
   const results = { lengthwise, crosswise }
   return results
 }

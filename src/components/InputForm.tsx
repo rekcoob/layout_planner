@@ -12,7 +12,7 @@ export default function InputForm() {
     setFormatWidth,
   } = useAppContext()
 
-  // console.log('InputForm rendered!')
+  // console.log('[Input Form] rendered!')
 
   return (
     <div className='form-container'>

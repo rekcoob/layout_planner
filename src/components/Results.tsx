@@ -27,7 +27,7 @@ export default function LayoutResults() {
       )}
     </>
   )
-  // console.log('Layout rendered!')
+  // console.log('[Results] rendered')
   return (
     <div>
       <h2 style={{ marginTop: '5px' }}>Calculation </h2>

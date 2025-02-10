@@ -1,5 +1,11 @@
 // context/AppContext.tsx
-import React, { createContext, useContext, useState, ReactNode } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useMemo,
+} from 'react'
 
 interface IAppState {
   rectLength: number
@@ -23,17 +29,21 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   // Format dimensions
   const [formatLength, setFormatLength] = useState<number>(2000)
   const [formatWidth, setFormatWidth] = useState<number>(1000)
+  // Use useMemo to memoize the context value
+  const value = useMemo(
+    () => ({
+      rectLength,
+      rectWidth,
+      formatLength,
+      formatWidth,
+      setRectLength,
+      setRectWidth,
+      setFormatLength,
+      setFormatWidth,
+    }),
+    [rectLength, rectWidth, formatLength, formatWidth]
+  ) // Only re-create value when one of the dependencies changes
 
-  const value: IAppState = {
-    rectLength,
-    rectWidth,
-    formatLength,
-    formatWidth,
-    setRectLength,
-    setRectWidth,
-    setFormatLength,
-    setFormatWidth,
-  }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
 
@@ -42,5 +52,6 @@ export const useAppContext = (): IAppState => {
   if (!context) {
     throw new Error('useAppContext must be used within an AppProvider')
   }
+  // console.log('useContext')
   return context
 }

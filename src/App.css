@@ -85,7 +85,7 @@ button {
 }
 .btn-sm:hover {
   border: 1px solid var(--secondary-color);
-  box-shadow: 0 4px 8px var(--secondary-color);
+  /* box-shadow: 0 3px 3px var(--secondary-color); */
   /* text-shadow: 2px 2px 5px var(--secondary-color); */
 }
 

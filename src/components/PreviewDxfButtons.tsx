@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { DxfViewer, DxfViewerLoadParams, DxfViewerOptions } from 'dxf-viewer'
 import { useDxfContent } from '../hooks/useDxfContent'
-import TagManager from 'react-gtm-module'
+import ReactGA from 'react-ga4'
 import { ICustomDxfViewerOptions, ICustomDxfLoadParams } from '../types'
 
 export default function PreviewDxfButtons() {
@@ -13,7 +13,6 @@ export default function PreviewDxfButtons() {
   const containerRef = useRef<HTMLDivElement>(null)
   const viewerRef = useRef<DxfViewer | null>(null)
 
-  // const { getDxfContent } = useDxfContent()
   const { getDxfBlob } = useDxfContent()
 
   useEffect(() => {
@@ -57,11 +56,10 @@ export default function PreviewDxfButtons() {
   }, [dxfBlob, showDxf])
 
   const handleClickLengthwise = async () => {
-    TagManager.dataLayer({
-      dataLayer: {
-        event: 'button_click',
-        button_name: 'Preview Legthwise',
-      },
+    ReactGA.event({
+      category: 'User',
+      action: 'Clicked Preview Lengthwise Button',
+      label: 'Preview DXF Lengthwise',
     })
     const blob = getDxfBlob('lengthwise')
     setDxfBlob(blob)
@@ -70,11 +68,10 @@ export default function PreviewDxfButtons() {
   }
 
   const handleClickCrosswise = async () => {
-    TagManager.dataLayer({
-      dataLayer: {
-        event: 'button_click',
-        button_name: 'Preview Crosswise',
-      },
+    ReactGA.event({
+      category: 'User',
+      action: 'Clicked Preview Crosswise Button',
+      label: 'Preview DXF Crosswise',
     })
 
     const blob = getDxfBlob('crosswise')
@@ -82,6 +79,8 @@ export default function PreviewDxfButtons() {
     setActiveButton('crosswise')
     setShowDxf(true)
   }
+
+  // console.log('[Preview Button] rendered')
 
   return (
     <div>
