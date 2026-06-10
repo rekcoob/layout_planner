@@ -43,7 +43,7 @@ For each orientation it shows columns, rows, total pieces, and whether any extra
 **Requirements:** Node.js 18+
 
 ```bash
-git clone https://github.com/rekcoob/layout-planner.git
+git clone https://github.com/rekcoob/layout_planner.git
 cd layout-planner
 npm install
 npm run dev        # opens at http://localhost:5173
